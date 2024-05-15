@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{ProfileController, PageController, TaskController};
+use App\Http\Controllers\{ProfileController, PageController, TaskController, UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,9 @@ use App\Http\Controllers\{ProfileController, PageController, TaskController};
 */
 
 Route::get('/', function () {
+    /* return response()->json([
+        'stuff' => phpinfo()
+       ]); */
     return view('welcome');
 });
 
@@ -27,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('about', [PageController::class, 'about']);
 Route::get('team', [PageController::class, 'team']);
+Route::get('user/{id}', [UserController::class, 'index']);
 
 Route::get('tasks/{id}', [TaskController::class, 'show'])
     ->name('tasks.show');

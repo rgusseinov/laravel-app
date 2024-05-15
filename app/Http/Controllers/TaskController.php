@@ -71,7 +71,6 @@ class TaskController extends Controller
 
     public function create()
     {
-        // Передаем в шаблон вновь созданный объект. Он нужен для вывода формы через Form::model
         $task = new Task();
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
@@ -95,22 +94,25 @@ class TaskController extends Controller
         $task = new Task();
 
         $data['status_id'] = $request->status_id;
-        $data['author_id'] = auth()->id();
+        $data['author_id'] = auth()->id() ?? 1;
         $data['executor_id'] = $request->executor_id ?? 1;
         $data['description'] = $request->description;
 
-        // Заполнение статьи данными из формы
         $task->fill($data);
-        // При ошибках сохранения возникнет исключение
         $task->save();
 
-        self::updateLabels($request, $task);
+        $selectedLabels = $request->input('labels', []);
+        foreach ($selectedLabels as $labelId) {
+            DB::table('task_labels')->insert([
+                'task_id' => $task->id,
+                'label_id' => $labelId,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        };
 
-        // Редирект на указанный маршрут
-        return redirect()
-            ->route('tasks.index');
+        return redirect()->route('tasks.index');
     }
-    
 
     public function update(Request $request, $id)
     {
@@ -149,7 +151,6 @@ class TaskController extends Controller
                     ->select('tasks.*', 'task_statuses.name as status_name', 'authors.name as author_name', 'executors.name as executor_name')
                     ->where('tasks.id', $id)
                     ->first();
-        // echo '<pre>'; print_r($task); echo '</pre>';
         if (!$task){
             abort(404);
         }
@@ -184,5 +185,10 @@ class TaskController extends Controller
                 'updated_at' => now()
             ]);
         };
+    }
+
+    public function sum($a, $b)
+    {
+        return $a + $b;
     }
 }
