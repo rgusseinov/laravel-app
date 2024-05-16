@@ -19,6 +19,9 @@ class UserTest extends TestCase
 
     public function test_example(): void
     {
+        // Для каждого теста нужно готовить свой state в setUp или в самом тесте
+        // https://laravel.com/docs/11.x/database-testing#model-factories
+        // https://laravel.com/docs/11.x/database-testing#running-seeders
         $response = $this->get('/user/1');
     
         $response->assertStatus(200);
