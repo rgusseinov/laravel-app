@@ -2,23 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Label;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class LabelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // User::factory(3)->create();
-/* 
-        User::factory()->create([
+        /* Label::factory()->create([
             'id' => 3,
-            'name' => 'Anna',
-            'email' => 'anna@mail.ru'
+            'name' => 'Top'
         ]); */
     }
 }

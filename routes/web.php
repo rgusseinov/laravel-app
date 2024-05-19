@@ -15,11 +15,15 @@ use App\Http\Controllers\{ProfileController, PageController, TaskController, Use
 */
 
 Route::get('/', function () {
-    /* return response()->json([
-        'stuff' => phpinfo()
-       ]); */
     return view('welcome');
 });
+
+Route::get('/info', function () {
+    return response()->json([
+    'stuff' => phpinfo()
+   ]);
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
