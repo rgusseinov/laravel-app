@@ -13,9 +13,6 @@ class LabelSeeder extends Seeder
      */
     public function run(): void
     {
-        /* Label::factory()->create([
-            'id' => 3,
-            'name' => 'Top'
-        ]); */
+        Label::factory()->create();
     }
 }

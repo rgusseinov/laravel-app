@@ -13,9 +13,6 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        TaskStatus::factory()->create([
-            'id' => 6,
-            'name' => 'Архив'
-        ]);
+        TaskStatus::factory()->create();
     }
 }

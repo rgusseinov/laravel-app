@@ -13,12 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(3)->create();
-/* 
-        User::factory()->create([
-            'id' => 3,
-            'name' => 'Anna',
-            'email' => 'anna@mail.ru'
-        ]); */
+        User::factory()->create();
     }
 }

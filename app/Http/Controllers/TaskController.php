@@ -101,15 +101,7 @@ class TaskController extends Controller
         $task->fill($data);
         $task->save();
 
-        $selectedLabels = $request->input('labels', []);
-        foreach ($selectedLabels as $labelId) {
-            DB::table('task_labels')->insert([
-                'task_id' => $task->id,
-                'label_id' => $labelId,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        };
+        self::updateLabels($request, $task);
 
         return redirect()->route('tasks.index');
     }
@@ -185,10 +177,5 @@ class TaskController extends Controller
                 'updated_at' => now()
             ]);
         };
-    }
-
-    public function sum($a, $b)
-    {
-        return $a + $b;
     }
 }

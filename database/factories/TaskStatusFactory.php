@@ -14,8 +14,8 @@ class TaskStatusFactory extends Factory
         $maxId = TaskStatus::max('id');
 
         return [
-            'name' => $this->faker->word,
-            'id' => $this->faker->numberBetween(1, $maxId)
+            'id' => $maxId + 1,
+            'name' => fake()->word()
         ];
     }
 }

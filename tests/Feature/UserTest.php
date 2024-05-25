@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function setUp(): void
     {
@@ -26,14 +26,9 @@ class UserTest extends TestCase
 
     public function test_create_new_user()
     {
-        $userId = 2;
+        $user = User::factory()->create();
 
-        $user = User::factory()->create([
-            'id' => $userId,
-            'name' => 'Adil'
-        ]);
-        
-        $response = $this->get("/user/{$userId}");
+        $response = $this->get("/user/{$user->id}");
         
         $response->assertOk();
 
@@ -42,6 +37,5 @@ class UserTest extends TestCase
 
     protected function tearDown(): void
     {
-        // User::where('id', '=', 1)->delete();
     }
 }

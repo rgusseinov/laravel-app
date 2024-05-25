@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Label;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,11 @@ class LabelFactory extends Factory
      */
     public function definition(): array
     {
+        $maxId = Label::max('id');
+
         return [
-            //
+            'id' => $maxId + 1,
+            'name' => fake()->word()
         ];
     }
 }

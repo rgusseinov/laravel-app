@@ -27,7 +27,7 @@ class UserFactory extends Factory
         $maxId = User::max('id');
 
         return [
-            'id' => $this->faker->numberBetween(1, $maxId),
+            'id' => $maxId + 1,
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
